@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Solar Estimation Calculator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .no-display {
+            display: none;
+        }
+
+        .main-container {
+            margin: 0;
+            padding: 45px 40px;
+            background-color: #f5f5f5;
+            border-style: dashed;
+            border-width: 7px;
+            border-color: #58ac46;
+            border-radius: 10px;
+        }
+
+        .field-name {
+            padding: 15px 0;
+            position: relative;
+            float: none;
+            clear: both;
+        }
+
+        .field-label {
+            margin: 0 0 20px 0;
+            padding: 0;
+            font-size: 16px;
+            line-height: 19px;
+            color: #000000d9;
+            display: block;
+            font-weight: 700;
+            font-style: normal;
+            word-break: break-word;
+            word-wrap: break-word;
+        }
+
+        .field-required {
+            background-color: #ffffff;
+            border-radius: 3px;
+            color: #000000b3;
+            border: 1px solid #00000040;
+            padding: 0 30px 0 14px;
+            font-size: 18px;
+            line-height: 100%;
+            box-shadow: none;
+            transition: border 0.15s, box-shadow 0.15s;
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            font-family: inherit;
+            font-style: normal;
+            font-weight: 400;
+            margin: 0;
+            word-break: break-word;
+            hyphens: auto;
+            height: 50px;
+
+        }
+
+        .forms-submit {
+            font-weight: 700;
+            text-transform: capitalize;
+            font-size: calc(calc(100em * .01) * 1);
+            background-color: #58ac46;
+            color: #ffffff;
+            margin-right: 0px;
+            margin-bottom: 0px;
+            margin-left: 0px;
+            border-top-width: 0px;
+            border-right-width: 0px;
+            border-bottom-width: 0px;
+            border-left-width: 0px;
+            padding-top: 17px;
+            padding-right: 28px;
+            padding-bottom: 18px;
+            padding-left: 26px;
+            border-style: solid;
+            -webkit-border-radius: 30px;
+            -moz-border-radius: 30px;
+            border-radius: 30px;
+            overflow: hidden;
+            line-height: 1;
+            -webkit-text-fill-color: currentColor;
+        }
+
+        .forms-submit:hover {
+            background-color: #fff;
+            color: #25629f;
+            box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease-in-out;
+
+        }
+
+        .submit-container {
+            margin-top: 10px;
+            padding: 15px 0 0 0;
+            clear: both;
+            position: relative;
+        }
+
+        .output-text {
+            font-family: 'Poppins', sans-serif;
+            font-style: normal;
+            font-size: 17px;
+            padding: 30px 0;
+        }
+        /* WhatsApp Button Styles */
+.whatsapp-button {
+    display: inline-block;
+    background-color: #25d366; /* WhatsApp green color */
+    color: #fff; /* White text color */
+    font-weight: 700;
+            text-transform: capitalize;
+            font-size: calc(calc(100em * .01) * 1);
+            margin-right: 0px;
+            margin-bottom: 0px;
+            margin-left: 10px;
+            border-top-width: 0px;
+            border-right-width: 0px;
+            border-bottom-width: 0px;
+            border-left-width: 0px;
+            padding-top: 17px;
+            padding-right: 28px;
+            padding-bottom: 18px;
+            padding-left: 26px;
+            border-style: solid;
+            -webkit-border-radius: 30px;
+            -moz-border-radius: 30px;
+            border-radius: 30px;
+            overflow: hidden;
+            line-height: 1;
+            -webkit-text-fill-color: currentColor;
+}
+
+.whatsapp-button a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.whatsapp-button i {
+    margin-right: 5px; /* Add some space between the icon and text */
+}
+
+/* WhatsApp Icon Styles */
+.fa-whatsapp::before {
+    font-family: FontAwesome;
+    content: '\f232'; /* WhatsApp icon Unicode */
+    font-size: calc(calc(100em * .01) * 1);
+}
+
+    </style>
+</head>
+
+<body>
+    <div class="main-container">
+        <section aria-label="Solar Estimation Form">
+            <div id="SolarEstimationForm">
+                <form id="solar-form" method="post" class="wpforms-validate wpforms-form wpforms-ajax-form">
+                    <div class="field-name">
+                        <label for="name" class="field-label">Name</label>
+                        <input type="text" class="field-required" id="name" name="name" required
+                            placeholder="Enter your name">
+                    </div>
+                    <div class="field-name">
+                        <label for="address" class="field-label">Location</label>
+                        <input type="text" class="field-required" id="address" name="address" required
+                            placeholder="Enter your location">
+                    </div>
+                    <div class="field-name">
+                        <label for="monthly-bill" class="field-label">Average Monthly Electricity Bill</label>
+                        <input type="number" class="field-required" id="monthly-bill" name="monthly_bill" required
+                            min="0" placeholder="Enter your average monthly bill">
+                    </div>
+
+                    <div class="field-name">
+                        <label for="space" class="field-label">Available Space for Installation (in square feet)</label>
+                        <input type="number" class="field-required" id="space" name="space" required min="0"
+                            placeholder="Enter available space">
+                    </div>
+
+                    <div class="field-name">
+                        <label for="budget" class="field-label">Budget in Your Mind</label>
+                        <input type="number" class="field-required" id="budget" name="budget" required min="0"
+                            placeholder="Enter your budget">
+                    </div>
+                    <div class="field-name">
+                        <label for="system-type" class="field-label">Type of System</label>
+                        <select id="system-type" name="system_type" class="field-required" required>
+                            <option value="on-grid">On-Grid</option>
+                            <option value="off-grid">Off-Grid</option>
+                            <option value="hybrid">Hybrid</option>
+                        </select>
+                    </div>
+                    <div class="field-name">
+                        <label for="price-per-unit" class="field-label">Price per Unit (kWh)</label>
+                        <input type="number" class="field-required" id="price-per-unit" name="price_per_unit" required
+                            placeholder="Enter price per unit">
+                    </div>
+
+                    <div class="field-name" id="backup-days-group" style="display:none;">
+                        <label for="backup-days" class="field-label">Days of Backup Without Sun</label>
+                        <input type="number" class="field-required" id="backup-days" name="backup_days" required min="1"
+                            value="2" placeholder="Enter backup days">
+                    </div>
+
+                    <div class="field-name" id="netmetering-group" style="display:none;">
+                        <label for="netmetering">Add Net Metering (Additional PKR 100,000)?</label>
+                        <input type="checkbox" class="field-required" id="netmetering" name="netmetering">
+                    </div>
+
+                    <div class="field-name">
+                        <label for="peak-sunlight-hours" class="field-label">Average Peak Sunlight Hours</label>
+                        <input type="number" class="field-required" id="peak-sunlight-hours" name="peak_sunlight_hours"
+                            required min="1" value="4" placeholder="Enter peak sunlight hours">
+                    </div>
+
+                    <div class="field-name">
+                        <label for="purpose" class="field-label">Purpose</label>
+                        <select id="purpose" name="purpose" class="field-required" required>
+                            <option value="residential">Residential</option>
+                            <option value="commercial">Commercial</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="field-name" id="battery-type-group" style="display:none;">
+                        <label for="battery-type" class="field-label">Battery Type</label>
+                        <select id="battery-type" name="battery_type" class="field-required">
+                            <option value="lithium">Lithium</option>
+                            <option value="tubular">Tubular</option>
+                        </select>
+                    </div>
+                    <div class="submit-container">
+                        <button type="submit" class="forms-submit">Get Estimate</button>
+                    </div>
+                </form>
+
+            </div>
+        </section>
+        <section aria-label="Estimation Results" class="no-display" id="estimation-results">
+            <div id="estimation-output" aria-live="polite" class="output-text"></div>
+            <button type="submit" id="backButton" onclick="handleSumit()" class="forms-submit">Go Back</button>
+            <button type="submit" id="whatsbutt" class="whatsapp-button">
+                <a href="https://wa.me/" id="whats">
+                    <i class="fa fa-whatsapp"></i> Contact For More
+                </a>
+            </button>
+            
+        </section>
+    </div>
+
+
+
+
+
+    <script>
+
+        document.getElementById('solar-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            var sec = document.getElementById("SolarEstimationForm");
+            sec.classList.add("no-display");
+            var sec2 = document.getElementById("estimation-results");
+            sec2.classList.remove("no-display");
+
+            // Helper function to parse and validate numbers
+            function parseAndValidateNumber(input) {
+                const parsed = parseFloat(input);
+                return isNaN(parsed) ? null : parsed;
+            }
+
+            // Get user input
+            var name = document.getElementById('name').value;
+            var location = document.getElementById('address').value;
+            var unit = document.getElementById('price-per-unit').value;
+            var purpose = document.getElementById('purpose').value;
+            var systemType = document.getElementById('system-type').value;
+            var monthlyBill = parseAndValidateNumber(document.getElementById('monthly-bill').value);
+            var space = parseAndValidateNumber(document.getElementById('space').value);
+            var budget = parseAndValidateNumber(document.getElementById('budget').value);
+            var backupDays = parseAndValidateNumber(document.getElementById('backup-days').value);
+            var peakSunlightHours = parseAndValidateNumber(document.getElementById('peak-sunlight-hours').value);
+            var netMetering = document.getElementById('netmetering').checked;
+
+
+            if (!backupDays || backupDays <= 0) {
+                outputDiv.innerHTML = 'Please enter a valid backup days value.';
+                return;
+            }
+            if (!peakSunlightHours || peakSunlightHours <= 0) {
+                outputDiv.innerHTML = 'Please enter a valid peak sunlight hours value.';
+                return;
+            }
+
+            // For netMetering
+            var netMeteringCost = 0;
+            if (netMetering) {
+                netMeteringCost = 100000;  // PKR 100,000 for net metering
+            }
+
+            var totalCost = installationCost + batteryCost + netMeteringCost;
+
+            // Validate input and provide feedback
+            const outputDiv = document.getElementById('estimation-output');
+            if (!monthlyBill || monthlyBill <= 0) {
+                outputDiv.innerHTML = 'Please enter a valid monthly electricity bill.';
+                return;
+            }
+            if (!space || space <= 0) {
+                outputDiv.innerHTML = 'Please enter a valid space value.';
+                return;
+            }
+            if (!budget || budget <= 0) {
+                outputDiv.innerHTML = 'Please enter a valid budget value.';
+                return;
+            }
+
+            // Get battery type input
+            const batteryElement = document.getElementById('battery-type');
+            const batteryType = batteryElement ? batteryElement.value : null;
+            if (!batteryType) {
+                outputDiv.innerHTML = 'Please select a valid battery type.';
+                return;
+            }
+
+
+            // Get the price per unit (kWh) from user input
+            var pricePerUnit = parseAndValidateNumber(document.getElementById('price-per-unit').value);
+            if (pricePerUnit === null || pricePerUnit <= 0) {
+                outputDiv.innerHTML = 'Please enter a valid price per unit (kWh).';
+                return;
+            }
+            var monthlyConsumption = monthlyBill / pricePerUnit;
+
+            // Logging intermediate results for debugging
+            console.log("Name:", name);
+            console.log("Address:", location);
+            console.log("Purpose:", purpose);
+            console.log("System Type:", systemType);
+            console.log("Monthly Bill:", monthlyBill);
+            console.log("Price per Unit:", unit);
+            console.log("Space:", space);
+            console.log("Budget:", budget);
+            console.log("Battery Type:", batteryType);
+            console.log("Monthly Consumption:", monthlyConsumption);
+
+
+            var requiredSystemSize = monthlyConsumption / (30 * peakSunlightHours);
+            // Logging more intermediate results for debugging
+            console.log("Required System Size:", requiredSystemSize);
+
+
+            var recommendedSystemSize, pricePerWatt;
+            if (space) {
+                var maxPossibleSystemSize = getMaxPossibleSystemSize(space);
+                recommendedSystemSize = Math.min(requiredSystemSize, maxPossibleSystemSize);
+            } else {
+                recommendedSystemSize = requiredSystemSize;
+            }
+
+
+            recommendedSystemSize = requiredSystemSize;
+            console.log("Max Possible System Size:", maxPossibleSystemSize);
+            console.log("Recommended System Size:", recommendedSystemSize);
+
+            pricePerWatt = getPricePerWatt(recommendedSystemSize);
+            console.log("Price Per Watt:", pricePerWatt);
+
+            // Electricity generation estimation (assuming 4 hours of peak sunlight per day)
+            var dailyGeneration = recommendedSystemSize * peakSunlightHours;
+            var monthlyGeneration = dailyGeneration * 30;
+            var monthlySaving = monthlyGeneration * pricePerUnit;
+
+
+            console.log("Daily Generation:", dailyGeneration);
+            console.log("Monthly Generation:", monthlyGeneration);
+
+            // Carbon footprint reduction estimation (assuming 0.922 kg CO2 per kWh)
+            var monthlyCO2Reduction = monthlyGeneration * 0.922;
+            console.log("Monthly CO2 Reduction:", monthlyCO2Reduction);
+
+
+            // Electricity generation estimation (assuming 4 hours of peak sunlight per day)
+            var dailyGeneration = recommendedSystemSize * 4;
+            var monthlyGeneration = dailyGeneration * 30;
+
+            // Carbon footprint reduction estimation (assuming 0.922 kg CO2 per kWh)
+            var monthlyCO2Reduction = monthlyGeneration * 0.922;
+
+            // Battery cost estimation based on user's system type choice
+            var batterySize = recommendedSystemSize * backupDays;
+
+            // Battery cost estimation
+            var batteryCost = 0;
+            if (systemType === 'off-grid' || systemType === 'hybrid') {
+                var batterySize = recommendedSystemSize * backupDays;
+                if (batteryType === 'lithium') {
+                    if (batterySize <= 5) batteryCost = 550000;
+                    else if (batterySize <= 10) batteryCost = 1100000;
+                    else if (batterySize <= 20) batteryCost = 2200000;
+                    else batteryCost = 2200000 + (batterySize - 20) * (2200000 / 20);
+                } else {
+                    if (batterySize <= 5) batteryCost = 275000;
+                    else if (batterySize <= 10) batteryCost = 550000;
+                    else if (batterySize <= 20) batteryCost = 1100000;
+                    else batteryCost = 1100000 + (batterySize - 20) * (1100000 / 20);
+                }
+            }
+
+            updateBackupDaysAndBatteryTypeDisplay();
+
+
+            var installationCost = recommendedSystemSize * 1000 * pricePerWatt;  // converting kW to W for multiplication
+
+            var totalCost = installationCost + batteryCost;
+            var cumulativeSavings = 0;
+            var yearsToPayback = 0;
+
+            while (cumulativeSavings < totalCost) {
+                cumulativeSavings += (monthlySaving * 12) * (1 + 0.10 * yearsToPayback); // Increasing by 10% for inflation
+                yearsToPayback++;
+            }
+
+            // Adjust for partial years
+            yearsToPayback = yearsToPayback - 1 + (totalCost - cumulativeSavings + monthlySaving * 12) / (monthlySaving * 12);
+
+
+
+
+            // Display the results to the user
+            outputDiv.innerHTML = `
+    <strong>Estimation:</strong><br>
+    Recommended System Size: ${recommendedSystemSize.toFixed(2)} kW<br>
+    Monthly Generation: ${monthlyGeneration.toFixed(2)} kWh<br>
+    Monthly CO2 Reduction: ${monthlyCO2Reduction.toFixed(2)} kg<br>
+    Estimated Battery Cost: PKR ${batteryCost.toFixed(2)}<br>
+    Estimated Installation Cost: PKR ${installationCost.toFixed(2)}<br>
+    Estimated Payback Period: ${yearsToPayback.toFixed(2)} years<br>
+    <em>Note: This payback period is calculated while assuming a 10% inflation rate. In Pakistan, the inflation rate is fluctuating, which can result in a shorter payback time.</em>
+    <br/>
+    `;
+
+            var nameString = document.getElementById('name').value.toString();
+            var locationString = document.getElementById('address').value.toString();
+            var unitString = document.getElementById('price-per-unit').value.toString();
+            var purposeString = document.getElementById('purpose').value.toString();
+            var systemTypeString = document.getElementById('system-type').value.toString();
+            var monthlyBillString = document.getElementById('monthly-bill').value.toString();
+            var spaceString = document.getElementById('space').value.toString();
+            var budgetString = document.getElementById('budget').value.toString();
+
+            var link = document.getElementById("whats");
+            var href = `https://wa.me/923420806133?text=Hello, This is ${nameString}. Here are my estimates from your calculator:  • Name: ${nameString}  • Location: ${locationString}  • Budget: ${budgetString}PKR  • Purpose: ${purposeString}  • Recommended System Size: ${recommendedSystemSize.toFixed(2)} kW  • Monthly Bill: ${monthlyBillString}PKR  • Unit: ${unitString}kWh. I am interested in the above. Could you please elaborate further?`;
+            link.href = href;
+            console.log(href);
+
+        });
+
+
+        document.getElementById('system-type').addEventListener('change', updateBackupDaysAndBatteryTypeDisplay);
+
+        function updateBackupDaysAndBatteryTypeDisplay() {
+            const systemType = document.getElementById('system-type').value;
+            const batteryTypeGroup = document.getElementById('battery-type-group');
+            const backupDaysGroup = document.getElementById('backup-days-group');
+            const netmeteringGroup = document.getElementById('netmetering-group');
+
+            if (systemType === 'off-grid' || systemType === 'hybrid') {
+                batteryTypeGroup.style.display = 'block';
+                backupDaysGroup.style.display = 'block';
+            } else {
+                batteryTypeGroup.style.display = 'none';
+                backupDaysGroup.style.display = 'none';
+            }
+
+            if (systemType === 'hybrid') {
+                netmeteringGroup.style.display = 'block';
+            } else {
+                netmeteringGroup.style.display = 'none';
+            }
+        }
+
+
+
+        function getRandomInt(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+
+        function getMaxPossibleSystemSize(space) {
+            return space / 100;  // Assuming 100 sq ft per kW
+        }
+
+
+        function getPricePerWatt(systemSize) {
+            // Using average values instead of random values
+            if (systemSize <= 3) return 180;
+            if (systemSize <= 5) return 175;
+            if (systemSize <= 10) return 170;
+            if (systemSize <= 20) return 165;
+            if (systemSize <= 30) return 160;
+            if (systemSize <= 50) return 155;
+            if (systemSize <= 100) return 150;
+            return 0;
+        }
+
+        function getBatteryCost(batteryType, batterySize) {
+            let baseCostPerKWh;
+            let efficiencyLossOverTime;
+
+            if (batteryType === 'lithium') {
+                baseCostPerKWh = 220000 / 20; // Example base cost
+                efficiencyLossOverTime = 0.02; // Example: 2% efficiency loss per year
+            } else { // tubular
+                baseCostPerKWh = 110000 / 20; // Example base cost
+                efficiencyLossOverTime = 0.04; // Example: 4% efficiency loss per year
+            }
+
+            let totalCost = baseCostPerKWh * batterySize;
+
+            // Adjust the cost for efficiency loss if the battery is expected to be replaced after it becomes inefficient
+            totalCost *= (1 + efficiencyLossOverTime);
+
+            return totalCost;
+        }
+
+        function getCostBreakdown(systemSize, pricePerWatt) {
+            // ... (this function remains unchanged)
+        }
+
+        function handleSumit() {
+            const form = document.getElementById('solar-form');
+            form.reset();
+            const outputDiv = document.getElementById('estimation-output');
+            outputDiv.innerHTML = '';
+            const sec = document.getElementById('SolarEstimationForm');
+            sec.classList.remove('no-display');
+        }
+
+    </script>
+
+</body>
+
+</html>
